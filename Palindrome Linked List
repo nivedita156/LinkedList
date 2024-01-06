@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode *slow=head, *fast=head;
+        while(fast!= 0 && fast->next!= 0){           //slow is our middle
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        if(fast !=0 && fast->next==0){             //if length of ll is odd
+            slow=slow->next;
+        }
+        ListNode *temp, *prev;
+        prev= 0;
+        while(slow!=0 && slow->next!=0){          //reversing  the back half
+            temp=slow->next;
+            slow->next=prev;
+            prev=slow;
+            slow=temp;
+        }
+        slow->next=prev;
+        
+        fast=head;                                    //comaparison of values
+        while(fast!=0 && slow!=0){
+            if(slow->val!=fast->val){
+                return false;
+            }
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return true;  
+    }
+};
