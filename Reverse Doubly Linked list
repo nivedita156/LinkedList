@@ -1,0 +1,30 @@
+class Solution
+{
+    public:
+    Node* reverseDLL(Node * head)
+    {
+        if(head==NULL || head->next==NULL) return head;
+        
+        
+        Node* tail;
+        tail=head->next;
+        tail->prev=tail->next;
+        tail->next=head;
+        
+        
+        Node* temp;
+        temp=head->next;
+        while(tail->prev!=NULL){
+            tail=tail->prev;
+            tail->prev=tail->next;
+            tail->next=temp;
+            temp=temp->prev;
+        }
+        
+        head->prev=head->next;
+        head->next=NULL;
+        
+        return tail;
+        
+    }
+};
