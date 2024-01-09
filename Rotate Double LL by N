@@ -1,0 +1,25 @@
+Node* rotatebyN(Node *head, int pos){
+	if(pos==0) return head;
+	
+	Node* temp=head;
+	while(temp->next!=NULL){
+		temp=temp->next;
+	}
+	
+	//make list circular
+	
+	temp->next=head;
+	head->prev=temp;
+	
+	//making list uncircular again
+	int count=1;
+	while(count<=pos){
+		head=head->next;
+		temp=temp->next;
+		count++;
+	}
+	temp->next=NULL;
+	head->prev=NULL;
+	
+	return head;
+}
